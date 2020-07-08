@@ -17,7 +17,11 @@ public class BcryptEncoderTest {
             String encodedString = encoder.encode("pankaj");
             System.out.println(encodedString);
         }
-
+        BCryptPasswordEncoder encoder1 = new BCryptPasswordEncoder();
+        String secret1 = "{bcrypt}" + encoder1.encode("pankaj");
+        String secret2 = "{bcrypt}" + encoder1.encode("user");
+        System.out.println(secret1);
+        System.out.println(secret2);
         // TODO Auto-generated method stub
 
     }

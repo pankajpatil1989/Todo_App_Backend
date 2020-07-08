@@ -3,23 +3,27 @@ package com.pankaj.restfulwebservices.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.Date;
+import javax.persistence.ManyToMany;
+import java.util.Collection;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Todo extends Auditable {
+public class Role {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private String userName;
-    private String description;
-    private Date targetDate;
-    private boolean isDone;
+    @GeneratedValue
+    private Long roleId;
+
+    @NonNull
+    private String name;
+
+    @ManyToMany( mappedBy = "roles")
+    private Collection<User> users;
+
 }

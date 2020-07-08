@@ -7,6 +7,7 @@ import com.pankaj.restfulwebservices.services.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -33,26 +34,7 @@ public class TodoJpaController {
         return todoJpaRepository.findById(id).get();
     }
 
-    //DELETE /users/{username}/todos/{id}
-    @DeleteMapping("/jpa/users/{username}/todos/{id}")
-    public ResponseEntity<Void> deleteTodo(
-            @PathVariable String username, @PathVariable long id){
-
-        todoJpaRepository.deleteById(id);
-        return ResponseEntity.noContent().build();
-    }
-
-
-    //Edit/Update a Todo
-    @PutMapping("/jpa/users/{username}/todos/{id}")
-    public ResponseEntity<Todo> updateTodo(
-            @PathVariable String username,
-            @PathVariable long id, @RequestBody Todo todo){
-
-        Todo todoUpdated = todoJpaRepository.save(todo);
-        return new ResponseEntity<Todo>(todo, HttpStatus.OK);
-    }
-
+    @Secured({"ROLE_ADMIN"})
     @PostMapping("/jpa/users/{username}/todos")
     public ResponseEntity<Void> createTodo(
             @PathVariable String username, @RequestBody Todo todo){
@@ -69,4 +51,22 @@ public class TodoJpaController {
         return ResponseEntity.created(uri).build();
     }
 
+    //Edit/Update a Todo
+    @PutMapping("/jpa/users/{username}/todos/{id}")
+    public ResponseEntity<Todo> updateTodo(
+            @PathVariable String username,
+            @PathVariable long id, @RequestBody Todo todo){
+
+        Todo todoUpdated = todoJpaRepository.save(todo);
+        return new ResponseEntity<Todo>(todo, HttpStatus.OK);
+    }
+
+    //DELETE /users/{username}/todos/{id}
+    @DeleteMapping("/jpa/users/{username}/todos/{id}")
+    public ResponseEntity<Void> deleteTodo(
+            @PathVariable String username, @PathVariable long id){
+
+        todoJpaRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
 }

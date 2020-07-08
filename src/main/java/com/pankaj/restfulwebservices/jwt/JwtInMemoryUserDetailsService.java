@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.pankaj.restfulwebservices.model.User;
+import com.pankaj.restfulwebservices.services.UserDetailsServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -11,22 +14,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class JwtInMemoryUserDetailsService implements UserDetailsService {
-
-    static List<JwtUserDetails> inMemoryUserList = new ArrayList<>();
-
-    static {
-        inMemoryUserList.add(new JwtUserDetails(1L, "in28minutes",
-                "$2a$10$3zHzb.Npv1hfZbLEU5qsdOju/tk2je6W6PnNnY.c1ujWPcZh4PL6e", "ROLE_USER_2"));
-        inMemoryUserList.add(new JwtUserDetails(2L, "pankaj",
-                "$2a$10$DLi/TZc4SzYdTNsiq6VT.eNjV8Xr9P9ue.O3ZWxBJoWO5.OKzbW9O", "ROLE_USER_2"));
-
-        //$2a$10$IetbreuU5KihCkDB6/r1DOJO0VyU9lSiBcrMDT.biU7FOt2oqZDPm
-    }
+    @Autowired
+    UserDetailsServiceImpl userDetailsServiceImpl;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<JwtUserDetails> findFirst = inMemoryUserList.stream()
-                .filter(user -> user.getUsername().equals(username)).findFirst();
+        Optional<UserDetails> findFirst = Optional.ofNullable(userDetailsServiceImpl.loadUserByUsername(username));
 
         if (!findFirst.isPresent()) {
             throw new UsernameNotFoundException(String.format("USER_NOT_FOUND '%s'.", username));
