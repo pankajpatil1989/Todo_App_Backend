@@ -31,6 +31,7 @@ import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.Collections;
 import java.util.List;
 
@@ -38,7 +39,7 @@ import static org.springframework.http.HttpMethod.*;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true,securedEnabled = true)
 @Order(1)
 @EnableSwagger2
 @ComponentScan(basePackages = "com.pankaj.restfulwebservices")
@@ -131,6 +132,14 @@ public class JWTWebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.js"
                 ).permitAll()
                 .anyRequest().authenticated();
+
+//        httpSecurity.exceptionHandling()
+//                .accessDeniedHandler((request, response, accessDeniedException) -> {
+//                    response.sendError(HttpServletResponse.SC_FORBIDDEN);
+//                })
+//                .authenticationEntryPoint((request, response, authException) -> {
+//                    response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+//                });
 
         httpSecurity.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
 
