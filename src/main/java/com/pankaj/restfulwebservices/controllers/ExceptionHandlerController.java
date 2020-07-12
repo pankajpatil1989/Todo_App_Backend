@@ -6,7 +6,6 @@ import com.pankaj.restfulwebservices.exception.ResourceNotFoundException;
 import com.pankaj.restfulwebservices.exception.UnauthorizedException;
 import com.pankaj.restfulwebservices.model.ErrorDetails;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
