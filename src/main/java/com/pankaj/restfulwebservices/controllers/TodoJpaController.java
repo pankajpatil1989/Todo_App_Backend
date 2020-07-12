@@ -1,6 +1,5 @@
 package com.pankaj.restfulwebservices.controllers;
 
-import com.pankaj.restfulwebservices.exception.ResourceNotFoundException;
 import com.pankaj.restfulwebservices.model.Todo;
 import com.pankaj.restfulwebservices.repositories.TodoJpaRepository;
 import com.pankaj.restfulwebservices.services.TodoService;

@@ -1,4 +1,4 @@
-package com.pankaj.restfulwebservices.jwt.resoures;
+package com.pankaj.restfulwebservices.jwt.model;
 
 import java.io.Serializable;
 

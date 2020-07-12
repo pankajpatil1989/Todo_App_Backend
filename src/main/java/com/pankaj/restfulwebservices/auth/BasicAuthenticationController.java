@@ -1,6 +1,5 @@
 package com.pankaj.restfulwebservices.auth;
 
-import com.pankaj.restfulwebservices.auth.AuthenticationBean;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 

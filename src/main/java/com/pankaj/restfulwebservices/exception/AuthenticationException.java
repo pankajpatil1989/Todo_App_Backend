@@ -1,4 +1,4 @@
-package com.pankaj.restfulwebservices.jwt.resoures;
+package com.pankaj.restfulwebservices.exception;
 
 public class AuthenticationException extends RuntimeException {
 	public AuthenticationException(String message, Throwable cause) {
