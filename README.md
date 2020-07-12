@@ -9,6 +9,7 @@
 * Authentication and Authorization (Users and Roles from DB)
 * JWT token
 * Global level exception handling (@ControllerAdvice)
+* Database - In-memory H2 database used
 * Project Lombok - To remove boiler plate code like- getter,setter,constructor etc.
 * Auditing - To auto create columns like - createdBy,createdDate,lastModifiedBy,lastModifiedDate etc. 
 * Swagger
